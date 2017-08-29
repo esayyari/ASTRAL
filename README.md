@@ -42,8 +42,8 @@ java -jar astral.4.11.2.jar -i test_data/song_primates.424.gene.tre
 
 This should quickly finish. There are also other sample input files under `test_data/` that can be used.
 
-ASTRAL can be run from any directory. You just need to run `java -jar /path/to/astral/astral.4.11.1.jar`.
-Also, you can move `astral.4.11.1.jar` to any location you like and run it from there, but note that you need
+ASTRAL can be run from any directory. You just need to run `java -jar /path/to/astral/astral.4.11.2.jar`.
+Also, you can move `astral.4.11.2.jar` to any location you like and run it from there, but note that you need
 to move the `lib` directory as well. 
 
 EXECUTION:

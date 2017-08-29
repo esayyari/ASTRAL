@@ -176,10 +176,12 @@ public class WQInference extends AbstractInference<Tripartition> {
 				}
 			}
 		}
-		
-
 		System.err.println("Quartet score is: " + sum/4l);
-		System.err.println("Normalized quartet score is: "+ (sum/4l+0.)/this.maxpossible);
+
+		double logsum = Math.log(sum/4l);
+		double logmax = Math.log(this.maxpossible);
+		double ret = Math.exp(logsum-logmax);
+		System.err.println("Normalized quartet score is: "+ ret);
 		//System.out.println(st.toNewickWD());
 
 		if (this.getBranchAnnotation() == 0){
@@ -194,7 +196,7 @@ public class WQInference extends AbstractInference<Tripartition> {
 				return logscore;
 			}
 		}
-		return (sum/4l+0.)/this.maxpossible;
+		return ret;
 		
 	}
 	
@@ -209,7 +211,7 @@ public class WQInference extends AbstractInference<Tripartition> {
 	private class NodeData {
 		Double mainfreq, alt1freqs, alt2freqs;
 		Long quartcount;
-		Integer effn ;
+		long effn ;
 		Quadrapartition [] quads;
 		STBipartition[] bipartitions;
 		

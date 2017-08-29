@@ -35,7 +35,7 @@ class WQWeightCalculator extends AbstractWeightCalculator<Tripartition> {
 	}
 
 	abstract class WeightCalculatorAlgorithm {
-		long F(int a, int b, int c) {
+		long F(long a, long b, long c) {
 			if (a < 0 || b < 0 || c < 0) {
 				throw new RuntimeException(
 					"negative side not expected: " + a + " " + b + " " + c);
@@ -62,16 +62,16 @@ class WQWeightCalculator extends AbstractWeightCalculator<Tripartition> {
 	 */
 	class TraversalWeightCalculator extends WeightCalculatorAlgorithm {
 		
-		int[][] stack = new int[GlobalMaps.taxonIdentifier.taxonCount() + 2][3];
+		long[][] stack = new long[GlobalMaps.taxonIdentifier.taxonCount() + 2][3];
 
-		int[][] overlap = new int[GlobalMaps.taxonIdentifier.taxonCount() +1][3];
+		long[][] overlap = new long[GlobalMaps.taxonIdentifier.taxonCount() +1][3];
 		int[][] overlapind = new int[GlobalMaps.taxonIdentifier.taxonCount() +1][3];
 
 		Integer [] geneTreesAsInts;
 		
 		Long calculateWeight(Tripartition trip) {
 
-			long weight = 0;
+			long weight = 0l;
 			int[] allsides = null;
 			Iterator<STITreeCluster> tit = dataCollection.treeAllClusters.iterator();
 			boolean newTree = true;
@@ -110,13 +110,13 @@ class WQWeightCalculator extends AbstractWeightCalculator<Tripartition> {
 				} else if (gtb == -2) { // Internal nodes
 
 					top--;
-					int newSides0 = stack[top][0] + stack[top - 1][0];
-					int newSides1 = stack[top][1] + stack[top - 1][1];
-					int newSides2 = stack[top][2] + stack[top - 1][2];
+					long newSides0 = stack[top][0] + stack[top - 1][0];
+					long newSides1 = stack[top][1] + stack[top - 1][1];
+					long newSides2 = stack[top][2] + stack[top - 1][2];
 
-					int side3s0 = allsides[0] - newSides0;
-					int side3s1 = allsides[1] - newSides1;
-					int side3s2 = allsides[2] - newSides2;
+					long side3s0 = allsides[0] - newSides0;
+					long side3s1 = allsides[1] - newSides1;
+					long side3s2 = allsides[2] - newSides2;
 
 					weight += F(stack[top][0], stack[top - 1][1], side3s2)
 							+ F(stack[top][0], stack[top - 1][2], side3s1)
@@ -342,7 +342,7 @@ class WQWeightCalculator extends AbstractWeightCalculator<Tripartition> {
 
 		long sharedQuartetCount(Tripartition that, Tripartition other) {
 
-			int I0 = that.cluster1.getBitSet().intersectionSize(
+			long I0 = that.cluster1.getBitSet().intersectionSize(
 					other.cluster1.getBitSet()), I1 = that.cluster1.getBitSet()
 					.intersectionSize(other.cluster2.getBitSet()), I2 = that.cluster1
 					.getBitSet().intersectionSize(other.cluster3.getBitSet()), I3 = that.cluster2
